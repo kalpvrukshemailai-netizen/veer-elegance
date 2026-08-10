@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+@theme {
+  --color-charcoal-900: #0F0E0D;
+  --color-ivory: #F5F1E8;
+  --color-gold-400: #E4C77A;
+  --color-gold-500: #C9A24B;
+  
+  --font-serif: "Cormorant Garamond", serif;
+  --font-sans: "Inter", sans-serif;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-charcoal-900);
+    color: var(--color-ivory);
+    font-family: var(--font-sans);
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+  }
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
