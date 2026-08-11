@@ -39,7 +39,7 @@ export function Navbar() {
       >
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
           <a href="#home" className="text-xl md:text-2xl font-serif text-gold-400 tracking-wider uppercase">
-            VEER ARTS
+            VEER ELEGANCE
           </a>
           
           <div className="hidden md:flex items-center space-x-12">
@@ -97,7 +97,7 @@ export function Navbar() {
             className="fixed inset-0 z-50 bg-charcoal-900 flex flex-col p-6"
           >
             <div className="flex justify-between items-center mb-12">
-              <span className="text-xl font-serif text-gold-400 uppercase tracking-widest">VEER ARTS</span>
+              <span className="text-xl font-serif text-gold-400 uppercase tracking-widest">VEER ELEGANCE</span>
               <button onClick={() => setIsMobileMenuOpen(false)} className="text-gold-400">
                 <X size={32} />
               </button>

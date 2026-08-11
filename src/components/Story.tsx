@@ -18,7 +18,7 @@ export function Story() {
             <h2 className="text-4xl md:text-5xl font-serif text-ivory mb-6">The Art of Imitation</h2>
             <div className="w-16 h-1 bg-gold-400 mb-8" />
             <p className="text-ivory/80 font-sans text-lg leading-relaxed">
-              Rooted in the rich heritage of Surat's jewelry-making tradition, Veer Arts brings you meticulously handcrafted imitation pieces that rival the beauty of real gems. 
+              Rooted in the rich heritage of Surat's jewelry-making tradition, Veer Elegance brings you meticulously handcrafted imitation pieces that rival the beauty of real gems. 
             </p>
             <p className="text-ivory/80 font-sans text-lg leading-relaxed mt-4">
               Our artisans blend age-old techniques with contemporary designs, ensuring every necklace, chain, and earring tells a story of elegance without compromise. Experience the luxury of fine craftsmanship curated just for you.

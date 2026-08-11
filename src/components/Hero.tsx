@@ -84,7 +84,7 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="text-lg md:text-xl text-ivory/80 mb-10 max-w-2xl font-sans"
         >
-          Veer Arts Immitation Jewellery brings you an exquisite collection of artificial jewellery, blending tradition with modern elegance.
+          Veer Elegance Immitation Jewellery brings you an exquisite collection of artificial jewellery, blending tradition with modern elegance.
         </motion.p>
 
         <motion.div
