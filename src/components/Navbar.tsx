@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Menu, X, ShoppingBag, Search, MapPin, User, Heart, Gem, Store } from 'lucide-react';
+import { Menu, X, ShoppingBag, Search, MapPin, User, Heart, Gem } from 'lucide-react';
 import { useCartStore } from '../store/useCart';
 
 export function Navbar() {
