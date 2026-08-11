@@ -1,25 +1,19 @@
 import { Navbar } from './components/Navbar';
-import { Hero } from './components/Hero';
-import { StickyScroll } from './components/StickyScroll';
-import { Gallery } from './components/Gallery';
-import { FeaturedSpotlight } from './components/FeaturedSpotlight';
-import { Story } from './components/Story';
-import { VisitUs } from './components/VisitUs';
+import { HeroCarousel } from './components/HeroCarousel';
+import { CollectionsGrid } from './components/CollectionsGrid';
+import { TopStyles } from './components/TopStyles';
 import { Footer } from './components/Footer';
 import { Cart } from './components/Cart';
 
 function App() {
   return (
-    <div className="bg-charcoal-900 min-h-screen text-ivory font-sans selection:bg-gold-400/30 selection:text-gold-400">
+    <div className="bg-white min-h-screen text-gray-900 font-sans selection:bg-black/10 selection:text-black">
       <Navbar />
       <Cart />
-      <main>
-        <Hero />
-        <StickyScroll />
-        <Gallery />
-        <FeaturedSpotlight />
-        <Story />
-        <VisitUs />
+      <main className="pt-0">
+        <HeroCarousel />
+        <CollectionsGrid />
+        <TopStyles />
       </main>
       <Footer />
     </div>
