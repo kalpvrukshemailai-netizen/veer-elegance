@@ -17,7 +17,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
-import { CATEGORIES } from "@/data/categories";
+import { CATEGORIES, CATEGORY_MAP } from "@/data/categories";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // CANDIDATE VIDEO POOL — derived directly from centralized categories
@@ -148,6 +148,10 @@ export default function HeroSection() {
           loop
           playsInline
           preload="metadata"
+          poster={
+            // Look up the poster for the selected video via CATEGORY_MAP
+            Object.values(CATEGORY_MAP).find(c => c.video === currentVideo)?.poster ?? undefined
+          }
           onLoadedData={() => setVideoLoaded(true)}
           onError={handleVideoError}
           className={`hero-video ${videoLoaded ? "hero-video-loaded" : ""}`}
