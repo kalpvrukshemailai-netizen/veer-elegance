@@ -34,18 +34,19 @@ import HomepagePopup       from "@/components/sections/HomepagePopup";
 import { Suspense }        from "react";
 import { CATEGORIES }      from "@/data/categories";
 import { getSiteSectionContent } from "@/lib/site-content";
+import { getFeaturedStorefrontProducts } from "@/lib/storefront";
 
-// Disable Next.js static caching for this page.
-// Admin changes to featured/published products and marketing are reflected immediately.
-export const dynamic = "force-dynamic";
+// Cache the homepage for 60 seconds (ISR) to fix slow loads
+export const revalidate = 60;
 
 export default async function HomePage() {
   const initialCategory = CATEGORIES[Math.floor(Math.random() * CATEGORIES.length)]?.id || "rings";
 
-  // Fetch marketing settings in parallel
-  const [announcement, popup] = await Promise.all([
+  // Fetch marketing settings and all featured products in parallel
+  const [announcement, popup, allFeaturedProducts] = await Promise.all([
     getSiteSectionContent("announcement"),
     getSiteSectionContent("popup"),
+    getFeaturedStorefrontProducts(),
   ]);
 
   return (
@@ -56,42 +57,41 @@ export default async function HomePage() {
         <HomepageSections
           initialActiveId={initialCategory}
           featuredByCategory={{
-            // Each FeaturedProducts instance is an async Server Component.
-            // It fetches only published + featured + !archived products for its category.
-            // If no products qualify, Suspense resolves to null instantly.
+            // Each FeaturedProducts instance now uses the pre-fetched products
+            // eliminating 28 simultaneous database queries.
             chains: (
               <Suspense fallback={null}>
-                <FeaturedProducts category="chains" />
+                <FeaturedProducts category="chains" products={allFeaturedProducts.filter(p => p.category === "chains")} />
               </Suspense>
             ),
             rings: (
               <Suspense fallback={null}>
-                <FeaturedProducts category="rings" />
+                <FeaturedProducts category="rings" products={allFeaturedProducts.filter(p => p.category === "rings")} />
               </Suspense>
             ),
             earrings: (
               <Suspense fallback={null}>
-                <FeaturedProducts category="earrings" />
+                <FeaturedProducts category="earrings" products={allFeaturedProducts.filter(p => p.category === "earrings")} />
               </Suspense>
             ),
             bracelets: (
               <Suspense fallback={null}>
-                <FeaturedProducts category="bracelets" />
+                <FeaturedProducts category="bracelets" products={allFeaturedProducts.filter(p => p.category === "bracelets")} />
               </Suspense>
             ),
             bangles: (
               <Suspense fallback={null}>
-                <FeaturedProducts category="bangles" />
+                <FeaturedProducts category="bangles" products={allFeaturedProducts.filter(p => p.category === "bangles")} />
               </Suspense>
             ),
             "mystery-box": (
               <Suspense fallback={null}>
-                <FeaturedProducts category="mystery-box" />
+                <FeaturedProducts category="mystery-box" products={allFeaturedProducts.filter(p => p.category === "mystery-box")} />
               </Suspense>
             ),
             "gen-z-accessories": (
               <Suspense fallback={null}>
-                <FeaturedProducts category="gen-z-accessories" />
+                <FeaturedProducts category="gen-z-accessories" products={allFeaturedProducts.filter(p => p.category === "gen-z-accessories")} />
               </Suspense>
             ),
           }}

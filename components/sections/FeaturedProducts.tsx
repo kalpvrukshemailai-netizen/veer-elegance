@@ -23,6 +23,7 @@ import Link  from "next/link";
 import { getFeaturedStorefrontProducts } from "@/lib/storefront";
 import type { ProductCategory } from "@/lib/products-db";
 import ProductCard from "@/components/products/ProductCard";
+import type { Product } from "@/data/products";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // CATEGORY LABELS
@@ -45,12 +46,15 @@ const CATEGORY_LABELS: Record<ProductCategory, { eyebrow: string; heading: strin
 interface FeaturedProductsProps {
   /** Only show featured products for this category. Defaults to all categories. */
   category?: ProductCategory;
+  /** Optionally pass pre-fetched products to avoid redundant database calls. */
+  products?: Product[];
 }
 
-export default async function FeaturedProducts({ category }: FeaturedProductsProps) {
+export default async function FeaturedProducts({ category, products }: FeaturedProductsProps) {
   // Fetch featured products from Supabase (published + featured + !archived).
   // Pass category to filter; if no category is given, returns all featured.
-  const featured = await getFeaturedStorefrontProducts(category);
+  // Skip fetching if products are provided directly via props.
+  const featured = products ?? await getFeaturedStorefrontProducts(category);
 
   // Nothing to show — render null (no empty section visible to customer)
   if (featured.length === 0) return null;
