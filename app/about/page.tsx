@@ -20,7 +20,8 @@ import WholesaleSection          from "@/components/about/WholesaleSection";
 import StoreSection              from "@/components/about/StoreSection";
 import { getAllSiteContent }     from "@/lib/site-content";
 
-export const dynamic = "force-dynamic";
+// Cache for 5 minutes — content changes via Admin CMS which calls revalidatePath("/about")
+export const revalidate = 300;
 
 export const metadata: Metadata = {
   title: "About & Our Story — Veer Elegance",

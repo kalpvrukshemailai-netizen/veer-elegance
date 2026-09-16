@@ -37,7 +37,8 @@ import type { Product } from "@/data/products";
 // ROUTE CONFIG — dynamic; do not cache between admin edits
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const dynamic = "force-dynamic";  // always fetch latest published products
+// Cache for 60 seconds — admin product actions call revalidatePath for each category
+export const revalidate = 60;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // STATIC PARAMS — still enumerate known categories for route pre-generation

@@ -26,7 +26,8 @@ import type { ProductCategory } from "@/lib/products-db";
 // ROUTE CONFIG — dynamic; unpublished products must disappear immediately
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const dynamic = "force-dynamic";
+// Cache for 60 seconds — admin product edits call revalidatePath("/product/[slug]")
+export const revalidate = 60;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // METADATA

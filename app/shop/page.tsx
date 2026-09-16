@@ -20,7 +20,8 @@ import { getStorefrontProducts } from "@/lib/storefront";
 import { CATEGORIES, getCategoryById } from "@/data/categories";
 import type { Product }          from "@/data/products";
 
-export const dynamic = "force-dynamic";
+// Cache for 60 seconds — admin revalidatePath() busts cache on product changes
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "Shop All Jewellery — Veer Elegance",
@@ -365,6 +366,7 @@ export default async function ShopPage() {
                           key={product.id}
                           product={product}
                           animationDelay={idx * 40}
+                          priority={idx < 3}
                         />
                       ))}
                     </div>
