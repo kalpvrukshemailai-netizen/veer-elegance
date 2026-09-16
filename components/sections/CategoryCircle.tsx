@@ -28,7 +28,7 @@
  * This keeps the layout engine in one place (CollectionExplorer).
  */
 
-import { useRef, useCallback } from "react";
+import { useRef, useCallback, useEffect } from "react";
 import { CATEGORY_MAP, type CategoryId } from "@/data/categories";
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -95,6 +95,21 @@ export default function CategoryCircle({
       onSelect(categoryId);
     }
   }, [categoryId, onSelect]);
+
+  // ── Auto-play / pause logic based on active/hover state ────────────────
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    
+    if (isActive || isHovered) {
+      v.preload = "auto";
+      v.play().catch(() => {});
+    } else {
+      v.pause();
+      // Optionally reset to beginning so it always starts fresh when hovered again
+      // v.currentTime = 0; 
+    }
+  }, [isActive, isHovered]);
 
   return (
     <button
@@ -164,8 +179,8 @@ export default function CategoryCircle({
           muted
           playsInline
           loop
-          autoPlay
-          preload="metadata"
+          preload={isActive ? "auto" : "none"}
+          poster={category.poster}
           aria-hidden="true"
           style={{
             position:       "absolute",
