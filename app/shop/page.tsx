@@ -24,13 +24,15 @@ import type { Product }          from "@/data/products";
 export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: "Shop All Jewellery — Veer Elegance",
+  title:       "Shop All Jewellery",
   description:
-    "Explore the complete Veer Elegance collection. Premium anti-tarnish everyday chains, rings, earrings, and bracelets crafted to last.",
+    "Explore the complete Veer Elegance collection. Premium anti-tarnish everyday chains, rings, earrings, bracelets and bangles crafted to last.",
+  alternates:  { canonical: "https://veer-elegance.vercel.app/shop" },
   openGraph: {
-    title: "Shop All Jewellery — Veer Elegance",
-    description:
-      "Discover fine anti-tarnish everyday jewellery crafted with quiet elegance and timeless design.",
+    title:       "Shop All Jewellery — Veer Elegance",
+    description: "Discover fine anti-tarnish everyday jewellery crafted with quiet elegance and timeless design.",
+    url:         "https://veer-elegance.vercel.app/shop",
+    images:      [{ url: "/images/og-default.jpg", width: 1200, height: 630, alt: "Shop Veer Elegance Jewellery" }],
   },
 };
 

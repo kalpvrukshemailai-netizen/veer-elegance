@@ -66,8 +66,21 @@ export async function generateMetadata({
     };
   }
   return {
-    title:       `${cat.shopHeadline} — Veer Elegance`,
+    title:       cat.shopHeadline,
     description: cat.shopDescription,
+    alternates:  { canonical: `https://veer-elegance.vercel.app/shop/${cat.slug}` },
+    openGraph: {
+      title:       `${cat.shopHeadline} — Veer Elegance`,
+      description: cat.shopDescription,
+      url:         `https://veer-elegance.vercel.app/shop/${cat.slug}`,
+      images:      cat.poster
+        ? [{ url: cat.poster, width: 800, height: 800, alt: cat.label }]
+        : [{ url: "/images/og-default.jpg", width: 1200, height: 630, alt: "Veer Elegance" }],
+    },
+    twitter: {
+      card:   "summary_large_image" as const,
+      images: cat.poster ? [cat.poster] : ["/images/og-default.jpg"],
+    },
   };
 }
 

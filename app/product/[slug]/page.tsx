@@ -48,9 +48,33 @@ export async function generateMetadata({
     };
   }
 
+  const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://veer-elegance.vercel.app";
+  const priceStr = product.price ? `\u20b9${product.price}` : null;
+  const desc = [
+    product.shortDescription ?? product.description ?? "Premium jewellery by Veer Elegance.",
+    priceStr ? `Price: ${priceStr}.` : null,
+    product.material ? `Material: ${product.material}.` : null,
+    product.antiTarnish ? "100% anti-tarnish." : null,
+  ].filter(Boolean).join(" ");
+
   return {
-    title:       `${product.name ?? "Jewellery"} — Veer Elegance`,
-    description: product.shortDescription ?? product.description ?? "Premium jewellery by Veer Elegance.",
+    title:       product.name ?? "Jewellery",
+    description: desc,
+    alternates:  { canonical: `${BASE_URL}/product/${slug}` },
+    openGraph: {
+      type:        "website",
+      url:         `${BASE_URL}/product/${slug}`,
+      title:       `${product.name ?? "Jewellery"} — Veer Elegance`,
+      description: desc,
+      images: product.image
+        ? [{ url: product.image, width: 800, height: 1000, alt: product.alt }]
+        : [{ url: "/images/og-default.jpg", width: 1200, height: 630, alt: "Veer Elegance" }],
+    },
+    twitter: {
+      card:   "summary_large_image",
+      title:  `${product.name ?? "Jewellery"} — Veer Elegance`,
+      images: product.image ? [product.image] : ["/images/og-default.jpg"],
+    },
   };
 }
 
@@ -155,8 +179,43 @@ export default async function ProductPage({
     getCompleteTheLookForProduct(product.id),
   ]);
 
+  const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://veer-elegance.vercel.app";
+
+  // ── JSON-LD Product Schema for Google Rich Results ────────────────────────
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type":    "Product",
+    name:        product.name ?? "Jewellery",
+    description: product.shortDescription ?? product.description ?? "Premium jewellery by Veer Elegance.",
+    image:       product.images ?? (product.image ? [product.image] : []),
+    sku:         product.slug,
+    brand: {
+      "@type": "Brand",
+      name:    "Veer Elegance",
+    },
+    offers: {
+      "@type":           "Offer",
+      url:               `${BASE_URL}/product/${slug}`,
+      priceCurrency:     "INR",
+      price:             product.price ?? 0,
+      priceValidUntil:   new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split("T")[0],
+      availability:      product.available
+        ? "https://schema.org/InStock"
+        : "https://schema.org/OutOfStock",
+      itemCondition:     "https://schema.org/NewCondition",
+      seller: {
+        "@type": "Organization",
+        name:    "Veer Elegance",
+      },
+    },
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <SiteNavbar theme="light" />
       <main id="main-content" role="main">
         <ProductDetail

@@ -28,14 +28,67 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "Veer Elegance — Premium Anti-Tarnish Jewellery",
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://veer-elegance.vercel.app"
+  ),
+  title: {
+    default:  "Veer Elegance — Premium Anti-Tarnish Jewellery",
+    template: "%s — Veer Elegance",
+  },
   description:
-    "Discover Veer Elegance — thoughtfully crafted, premium everyday jewellery designed to last. Anti-tarnish, understated, timeless.",
-  keywords: ["jewellery", "anti-tarnish", "premium jewellery", "Veer Elegance", "everyday jewellery"],
+    "Discover Veer Elegance — thoughtfully crafted, premium everyday jewellery designed to last. Anti-tarnish stainless steel chains, rings, earrings, bracelets & bangles. Free shipping over ₹1,499.",
+  keywords: [
+    "anti-tarnish jewellery",
+    "stainless steel jewellery India",
+    "everyday jewellery",
+    "premium jewellery online",
+    "gold jewellery India",
+    "Veer Elegance",
+    "waterproof jewellery",
+    "chains online India",
+    "rings online India",
+    "earrings online India",
+    "bracelets online India",
+    "bangles online India",
+    "jewellery that doesn't tarnish",
+    "affordable luxury jewellery",
+  ],
+  authors:  [{ name: "Veer Elegance", url: "https://veer-elegance.vercel.app" }],
+  creator:  "Veer Elegance",
   openGraph: {
-    title: "Veer Elegance",
-    description: "Premium everyday anti-tarnish jewellery.",
-    type: "website",
+    type:        "website",
+    locale:      "en_IN",
+    url:         "https://veer-elegance.vercel.app",
+    siteName:    "Veer Elegance",
+    title:       "Veer Elegance — Premium Anti-Tarnish Jewellery",
+    description: "Premium everyday anti-tarnish jewellery. Stainless steel chains, rings, earrings & bracelets. Free shipping on orders over ₹1,499.",
+    images: [
+      {
+        url:    "/images/og-default.jpg",
+        width:  1200,
+        height: 630,
+        alt:    "Veer Elegance — Premium Anti-Tarnish Jewellery",
+      },
+    ],
+  },
+  twitter: {
+    card:        "summary_large_image",
+    title:       "Veer Elegance — Premium Anti-Tarnish Jewellery",
+    description: "Premium everyday anti-tarnish jewellery crafted to last.",
+    images:      ["/images/og-default.jpg"],
+  },
+  robots: {
+    index:          true,
+    follow:         true,
+    googleBot: {
+      index:             true,
+      follow:            true,
+      "max-image-preview": "large",
+      "max-snippet":       -1,
+    },
+  },
+  alternates: {
+    canonical: "https://veer-elegance.vercel.app",
   },
 };
 
